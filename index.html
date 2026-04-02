@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reenam Fabrics Pvt. Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Josefin+Sans:wght@100;300;400;600&amp;display=swap" rel="stylesheet">
+<style id="mainStyle">
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#B8860B;--gold-mid:#C9A96E;--gold-light:#F5E6C8;
+  --gold-pale:#FDF8F0;--cream:#FAFAF7;--white:#FFFFFF;
+  --dark:#1A1208;--text:#2C2416;--text-mid:#6B5B3E;
+  --text-light:#A08060;--border:#E8D9C0;--bl:#F0E6D5;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:'Josefin Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+
+
+.edit-on [data-e]:hover{outline:2px dashed var(--gold-mid);outline-offset:2px;cursor:text;}
+.edit-on [data-e]:focus{outline:2px solid var(--gold);outline-offset:2px;background:rgba(201,169,110,0.05);}
+.edit-on .swap-wrap{cursor:pointer;}
+.edit-on .swap-wrap:hover .swap-overlay{opacity:1;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:500;background:rgba(250,250,247,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--bl);display:flex;align-items:center;justify-content:space-between;padding:16px 20px;}
+.logo-main{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;letter-spacing:4px;color:var(--gold);text-transform:uppercase;}
+.logo-sub{font-size:7px;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);margin-top:2px;}
+.nav-links{list-style:none;display:flex;gap:32px;}
+.nav-links a{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-mid);text-decoration:none;transition:color .3s;}
+.nav-links a:hover{color:var(--gold);}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:3px;}
+.hbg span{display:block;width:22px;height:2px;background:var(--gold);transition:all .3s;}
+.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hbg.open span:nth-child(2){opacity:0;}
+.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mob-drawer{display:none;position:fixed;inset:0;background:var(--dark);z-index:800;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mob-drawer.open{display:flex;}
+.mob-drawer a{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--gold-light);text-decoration:none;letter-spacing:4px;}
+.mob-drawer .mob-close{position:absolute;top:20px;right:20px;background:none;border:none;font-size:28px;color:var(--gold);cursor:pointer;line-height:1;}
+
+/* HERO */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;background:var(--white);overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#FDF8F0,#fff 45%,#FDF5E8);}
+.hero-canvas{position:absolute;inset:0;opacity:.08;pointer-events:none;}
+.hero-side{position:absolute;right:0;top:0;bottom:0;width:44%;overflow:hidden;}
+.hero-side::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,#fff 0%,transparent 45%);}
+.hero-side .swap-wrap{height:100%;}
+.hero-body{position:relative;z-index:2;padding:64px 24px 64px 40px;max-width:540px;width:100%;}
+.eyebrow{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:22px;display:flex;align-items:center;gap:12px;}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);flex-shrink:0;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,8vw,90px);font-weight:300;line-height:.95;color:var(--dark);}
+.hero-title em{font-style:italic;color:var(--gold);display:block;}
+.hero-body p.sub{margin-top:24px;font-size:14px;line-height:1.9;color:var(--text-mid);max-width:340px;}
+.cta-row{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn-g{padding:13px 32px;background:var(--gold);color:#fff;font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:background .3s;}
+.btn-g:hover{background:var(--dark);}
+.btn-o{padding:13px 32px;background:transparent;color:var(--gold);border:1.5px solid var(--gold);font-family:'Josefin Sans',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;transition:all .3s;}
+.btn-o:hover{background:var(--gold);color:#fff;}
+
+/* MARQUEE */
+.marq{background:var(--gold);padding:13px 0;overflow:hidden;}
+.marq-track{display:flex;animation:marq 22s linear infinite;width:max-content;}
+.marq-item{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#fff;padding:0 36px;white-space:nowrap;}
+.marq-item::after{content:' ◆ ';}
+@keyframes marq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* SECTIONS */
+.sec{padding:72px 20px;max-width:1200px;margin:0 auto;}
+.sec-tag{font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-tag::before{content:'';width:24px;height:1px;background:var(--gold);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,54px);font-weight:300;line-height:1.1;color:var(--dark);}
+.sec-title em{font-style:italic;color:var(--gold);}
+
+/* ABOUT */
+.about-bg{background:var(--white);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:40px;}
+.about-text p{font-size:15px;line-height:2;color:var(--text-mid);margin-bottom:16px;}
+.astats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);margin-top:28px;overflow:hidden;}
+.astat{padding:18px 12px;text-align:center;border-right:1px solid var(--border);}
+.astat:last-child{border-right:none;}
+.astat-n{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--gold);display:block;line-height:1;}
+.astat-l{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);margin-top:3px;display:block;}
+.about-photos{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.aph{overflow:hidden;position:relative;aspect-ratio:4/3;}
+.aph.tall{grid-row:span 2;aspect-ratio:auto;}
+.aph:hover img{transform:scale(1.04);}
+.aph img{transition:transform .6s ease;}
+
+/* STATS BAND */
+.stats-band{background:var(--dark);}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto;}
+.sc{padding:44px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07);}
+.sc:last-child{border-right:none;}
+.sc-n{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--gold-mid);line-height:1;display:block;}
+.sc-l{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:7px;display:block;}
+
+/* FACTORY */
+.fac-row{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.fph{position:relative;overflow:hidden;aspect-ratio:4/3;}
+.fph:hover img{transform:scale(1.05);}
+.fph img{transition:transform .6s ease;}
+.fph-lbl{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(26,18,8,.8),transparent);padding:18px 14px 10px;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);}
+
+/* PRODUCTS FLOAT */
+.prod-sec{background:var(--gold-pale);padding:72px 0;overflow:hidden;}
+.prod-hdr{padding:0 20px;max-width:1200px;margin:0 auto 56px;}
+.gfield{position:relative;height:600px;width:100%;overflow:hidden;}
+.g-label{position:absolute;font-size:130px;font-family:'Cormorant Garamond',serif;font-weight:300;color:rgba(184,134,11,.05);pointer-events:none;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;user-select:none;}
+.forbit{position:absolute;}
+.fcard{width:170px;background:var(--white);border:1px solid var(--border);box-shadow:0 4px 16px rgba(184,134,11,.1);animation:cfloat linear infinite;transition:box-shadow .3s,border-color .3s;}
+.fcard:hover{border-color:var(--gold);box-shadow:0 10px 28px rgba(184,134,11,.22);}
+.fcard img{aspect-ratio:3/4;transition:none;}
+.fcard-info{padding:10px 12px;}
+.fcard-dno{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:2px;font-weight:600;}
+.fcard-desc{font-size:10px;color:var(--text-light);}
+@keyframes cfloat{0%,100%{transform:translateY(0) rotate(var(--r));}50%{transform:translateY(var(--fy)) rotate(var(--r));}}
+
+/* CATALOG */
+.cat-bg{background:var(--white);}
+.cat-sec{padding:72px 20px;max-width:1200px;margin:0 auto;}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:3px;margin-top:44px;background:var(--bl);}
+.dtile{background:var(--white);position:relative;overflow:hidden;aspect-ratio:3/4;}
+.dtile:hover img{transform:scale(1.07);}
+.dtile img{transition:transform .6s ease;}
+.dtile-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,18,8,.88) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:14px 12px;}
+.dtile-n{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--gold-light);line-height:1;}
+.dtile-t{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(232,214,192,.65);margin-top:2px;}
+
+/* CONTACT */
+.con-sec{background:var(--dark);padding:80px 20px;text-align:center;}
+.con-sec .sec-tag{justify-content:center;}
+.con-sec .sec-tag::before{display:none;}
+.con-sec .sec-title{color:#fff;}
+.con-sec .sec-title em{color:var(--gold-mid);}
+.con-desc{margin:16px auto 0;font-size:14px;line-height:1.9;color:rgba(255,255,255,.4);max-width:340px;}
+.con-btns{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.con-info{display:flex;justify-content:center;gap:36px;margin-top:48px;flex-wrap:wrap;}
+.ci-lbl{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-mid);margin-bottom:5px;}
+.ci-val{font-size:13px;color:rgba(255,255,255,.5);}
+
+/* FOOTER */
+footer{background:#0F0C06;padding:52px 20px 28px;}
+.ft-inner{max-width:1200px;margin:0 auto;}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);}
+.ft-brand{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:3px;color:var(--gold-mid);margin-bottom:12px;}
+.ft-about{font-size:12px;line-height:1.9;color:rgba(255,255,255,.28);max-width:240px;}
+.ft-col-t{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-mid);margin-bottom:18px;}
+.ft-links{list-style:none;}
+.ft-links li{margin-bottom:10px;}
+.ft-links a{font-size:12px;color:rgba(255,255,255,.32);text-decoration:none;transition:color .2s;}
+.ft-links a:hover{color:var(--gold-mid);}
+.ft-bottom{padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.ft-copy{font-size:10px;letter-spacing:1px;color:rgba(255,255,255,.18);}
+
+/* HELPERS */
+.divider{display:flex;align-items:center;gap:16px;padding:36px 20px;max-width:1200px;margin:0 auto;}
+.div-l{flex:1;height:1px;background:var(--border);}
+.div-d{width:7px;height:7px;background:var(--gold-mid);transform:rotate(45deg);flex-shrink:0;}
+.swap-wrap{position:relative;display:block;width:100%;height:100%;}
+.swap-overlay{position:absolute;inset:0;background:rgba(26,18,8,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;opacity:0;transition:opacity .3s;}
+.swap-overlay svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2;}
+.swap-overlay span{font-size:11px;letter-spacing:2px;color:#fff;text-transform:uppercase;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+/* MOBILE */
+@media(max-width:800px){
+  nav{top:44px;padding:14px 16px;}
+  .nav-links{display:none;}
+  .hbg{display:flex;}
+  .hero-side{opacity:.18;width:100%;}
+  .hero-body{padding:56px 20px 48px;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-photos{grid-template-columns:1fr 1fr;}
+  .aph.tall{grid-row:span 1;aspect-ratio:4/3;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .fac-row{grid-template-columns:1fr 1fr;}
+  .ft-grid{grid-template-columns:1fr;gap:28px;}
+  .gfield{height:480px;}
+  .fcard{width:145px;}
+  .con-info{gap:20px;}
+  .ft-bottom{flex-direction:column;text-align:center;}
+}
+@media(max-width:500px){
+  #editBar .elabel{display:none;}
+  .hero-title{font-size:42px!important;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .sc{padding:32px 12px;}
+  .sc-n{font-size:40px;}
+  .fac-row{grid-template-columns:1fr;}
+  .dgrid{grid-template-columns:repeat(2,1fr);}
+  .astats{grid-template-columns:1fr 1fr 1fr;}
+  .gfield{height:400px;}
+  .fcard{width:130px;}
+  .cta-row .btn-g,.cta-row .btn-o{width:100%;text-align:center;}
+  .con-btns .btn-g,.con-btns .btn-o{width:100%;text-align:center;max-width:280px;}
+}
+</style>
+</head>
+<body>
+
+<!-- EDIT TOOLBAR -->
+
+
+
+<!-- MOBILE DRAWER -->
+<div class="mob-drawer" id="mobDrawer">
+  <button class="mob-close" onclick="closeDrawer()">✕</button>
+  <a href="#about" onclick="closeDrawer()">About</a>
+  <a href="#products" onclick="closeDrawer()">Products</a>
+  <a href="#catalog" onclick="closeDrawer()">Catalog</a>
+  <a href="#contact" onclick="closeDrawer()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav" style="top: 0px;">
+  <div>
+    <div class="logo-main">Reenam Fabrics</div>
+    <div class="logo-sub">Private Limited · Surat</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#catalog">Catalog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hbg" id="hbg" onclick="openDrawer()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <canvas class="hero-canvas" id="heroCanvas" width="300" height="150"></canvas>
+  <div class="hero-side">
+    <div class="swap-wrap">
+      <img id="hero_img" src="IMG-20260305-WA0011.jpg" alt="Hero Fabric">
+      
+    </div>
+  </div>
+  <div class="hero-body">
+    <p class="eyebrow">Est. Surat, Gujarat · Premium Manufacturer</p>
+    <h1 class="hero-title">
+      <span>Reenam</span>
+      <em>Fabrics</em>
+    </h1>
+    <p class="sub">Where threads transcend gravity — luxury embroidered net fabrics crafted for the world's finest garments.</p>
+    <div class="cta-row">
+      <a href="#catalog" class="btn-g">View Collection</a>
+      <a href="#contact" class="btn-o">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marq">
+  <div class="marq-track">
+    <div class="marq-item">Embroidered Net</div><div class="marq-item">Sequin Work</div>
+    <div class="marq-item">Bridal Collection</div><div class="marq-item">Export Quality</div>
+    <div class="marq-item">Premium Lace</div><div class="marq-item">Custom Designs</div>
+    <div class="marq-item">Reenam Fabrics Pvt. Ltd.</div>
+    <div class="marq-item">Embroidered Net</div><div class="marq-item">Sequin Work</div>
+    <div class="marq-item">Bridal Collection</div><div class="marq-item">Export Quality</div>
+    <div class="marq-item">Premium Lace</div><div class="marq-item">Custom Designs</div>
+    <div class="marq-item">Reenam Fabrics Pvt. Ltd.</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-bg" id="about">
+  <div class="sec reveal">
+    <p class="sec-tag">Who We Are</p>
+    <h2 class="sec-title"><span>Crafted in Surat,</span> <em>Worn Worldwide</em></h2>
+    <div class="about-grid">
+      <div class="about-text d1">
+        <p>Reenam Fabrics Private Limited is a premier manufacturer of high-end embroidered net and lace fabrics, rooted in the heart of India's textile capital — Surat, Gujarat.</p>
+        <p>Our state-of-the-art facility houses advanced MVD73 multi-drive embroidery machines alongside a fully equipped design studio, ensuring every metre of fabric meets the highest global standards.</p>
+        <p>From bridal couture to ready-to-wear fashion, our collections blend traditional craftsmanship with modern precision.</p>
+        <div class="astats">
+          <div class="astat"><span class="astat-n">500+</span><span class="astat-l">Designs</span></div>
+          <div class="astat"><span class="astat-n">200+</span><span class="astat-l">Team Members</span></div>
+          <div class="astat"><span class="astat-n">30+</span><span class="astat-l">Countries</span></div>
+        </div>
+      </div>
+      <div class="about-photos d2">
+        <div class="aph tall">
+          <div class="swap-wrap">
+            <img id="ab1" src="IMG-20260401-WA0007.jpg" alt="HQ">
+            
+          </div>
+        </div>
+        <div class="aph">
+          <div class="swap-wrap">
+            <img id="ab2" src="IMG-20260401-WA0006.jpg" alt="Studio">
+            
+          </div>
+        </div>
+        <div class="aph">
+          <div class="swap-wrap">
+            <img id="ab3" src="IMG-20260401-WA0009.jpg" alt="Machine">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stats-row">
+    <div class="sc"><span class="sc-n">1500+</span><span class="sc-l">Tons Warp Knitting Fabric Yearly</span></div>
+    <div class="sc"><span class="sc-n">30+</span><span class="sc-l">Years of Excellence</span></div>
+    <div class="sc"><span class="sc-n">60L</span><span class="sc-l">Meters Schiffli Embroidery Fabric Yearly</span></div>
+    <div class="sc"><span class="sc-n">100%</span><span class="sc-l">Quality Assured</span></div>
+  </div>
+</div>
+
+<!-- FACTORY PHOTOS -->
+<div style="background:var(--white);">
+  <div class="fac-row">
+    <div class="fph">
+      <div class="swap-wrap" style="height:100%;">
+        <img id="f1" src="IMG-20260401-WA0005.jpg" alt="Machines">
+        
+      </div>
+      <div class="fph-lbl">Knitting Machines</div>
+    </div>
+    <div class="fph">
+      <div class="swap-wrap" style="height:100%;">
+        <img id="f2" src="IMG-20260401-WA0010.jpg" alt="Production">
+        
+      </div>
+      <div class="fph-lbl">Production Floor</div>
+    </div>
+    <div class="fph">
+      <div class="swap-wrap" style="height:100%;">
+        <img id="f3" src="IMG-20260401-WA0011.jpg" alt="Processing">
+        
+      </div>
+      <div class="fph-lbl">Fabric Processing</div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING PRODUCTS -->
+<section class="prod-sec" id="products">
+  <div class="prod-hdr reveal">
+    <p class="sec-tag">The Collection</p>
+    <h2 class="sec-title"><span>Fabrics That</span> <em>Defy Gravity</em></h2>
+    <p style="margin-top:10px;font-size:12px;letter-spacing:1px;color:var(--text-light);">Move your cursor — watch the fabrics float</p>
+  </div>
+  <div class="gfield" id="gfield"><div class="g-label">REENAM</div><div class="forbit" style="left: 3%; top: 4%;"><div class="fcard" style="--r: -2deg; --fy: -20px; animation-duration: 6.5s; animation-delay: 0s;"><img src="IMG-20260305-WA0011.jpg" alt="D.no. 896" style="width:100%;aspect-ratio:3/4;object-fit:cover;" onerror="this.style.background='#F5E6C8'"><div class="fcard-info"><span class="fcard-dno">D.no. 896</span><span class="fcard-desc">Pink Floral Net</span></div></div></div><div class="forbit" style="left: 24%; top: 10%;"><div class="fcard" style="--r: 1.5deg; --fy: -16px; animation-duration: 8s; animation-delay: -2s;"><img src="IMG-20260305-WA0010.jpg" alt="D.no. 905" style="width:100%;aspect-ratio:3/4;object-fit:cover;" onerror="this.style.background='#F5E6C8'"><div class="fcard-info"><span class="fcard-dno">D.no. 905</span><span class="fcard-desc">Aqua Sequin</span></div></div></div><div class="forbit" style="left: 46%; top: 2%;"><div class="fcard" style="--r: -1deg; --fy: -26px; animation-duration: 7s; animation-delay: -4s;"><img src="IMG-20260305-WA0000.jpg" alt="D.no. 732" style="width:100%;aspect-ratio:3/4;object-fit:cover;" onerror="this.style.background='#F5E6C8'"><div class="fcard-info"><span class="fcard-dno">D.no. 732</span><span class="fcard-desc">Big Pana Seq.</span></div></div></div><div class="forbit" style="left: 67%; top: 7%;"><div class="fcard" style="--r: 2deg; --fy: -18px; animation-duration: 9s; animation-delay: -1s;"><img src="IMG-20260305-WA0015.jpg" alt="D.no. 962" style="width:100%;aspect-ratio:3/4;object-fit:cover;" onerror="this.style.background='#F5E6C8'"><div class="fcard-info"><span class="fcard-dno">D.no. 962</span><span class="fcard-desc">Teal Dot Mesh</span></div></div></div><div class="forbit" style="left: 8%; top: 54%;"><div class="fcard" style="--r: -2.5deg; --fy: -22px; animation-duration: 7.5s; animation-delay: -5s;"><img src="IMG-20260305-WA0012.jpg" alt="D.no. 886" style="width:100%;aspect-ratio:3/4;object-fit:cover;" onerror="this.style.background='#F5E6C8'"><div class="fcard-info"><span class="fcard-dno">D.no. 886</span><span class="fcard-desc">Silver Leaf Net</span></div></div></div><div class="forbit" style="left: 32%; top: 49%;"><div class="fcard" style="--r: 1deg; --fy: -24px; animation-duration: 8.5s; animation-delay: -3s;"><img src="IMG-20260305-WA0017.jpg" alt="D.no. 906" style="width:100%;aspect-ratio:3/4;object-fit:cover;" onerror="this.style.background='#F5E6C8'"><div class="fcard-info"><span class="fcard-dno">D.no. 906</span><span class="fcard-desc">Rose Scatter</span></div></div></div><div class="forbit" style="left: 55%; top: 52%;"><div class="fcard" style="--r: -3deg; --fy: -14px; animation-duration: 6s; animation-delay: -6s;"><img src="IMG-20260305-WA0028.jpg" alt="D.no. 8656" style="width:100%;aspect-ratio:3/4;object-fit:cover;" onerror="this.style.background='#F5E6C8'"><div class="fcard-info"><span class="fcard-dno">D.no. 8656</span><span class="fcard-desc">White Petal</span></div></div></div><div class="forbit" style="left: 76%; top: 46%;"><div class="fcard" style="--r: 2deg; --fy: -20px; animation-duration: 7s; animation-delay: -1.5s;"><img src="IMG-20260305-WA0036.jpg" alt="D.no. 800" style="width:100%;aspect-ratio:3/4;object-fit:cover;" onerror="this.style.background='#F5E6C8'"><div class="fcard-info"><span class="fcard-dno">D.no. 800</span><span class="fcard-desc">Botanical Thread</span></div></div></div></div>
+</section>
+
+<!-- DIVIDER -->
+<div style="background:var(--white);">
+  <div class="divider"><div class="div-l"></div><div class="div-d"></div><div class="div-l"></div></div>
+</div>
+
+<!-- CATALOG -->
+<div class="cat-bg" id="catalog">
+  <div class="cat-sec">
+    <div class="reveal">
+      <p class="sec-tag">Design Catalog</p>
+      <h2 class="sec-title"><span>Our Signature</span> <em>Designs</em></h2>
+      <p style="margin-top:10px;font-size:12px;letter-spacing:1px;color:var(--text-light);">Each design is uniquely numbered and crafted on premium net fabric.</p>
+    </div>
+    <div class="dgrid" id="dgrid"><div class="dtile"><img src="IMG-20260305-WA0011.jpg" alt="896" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">896</div><div class="dtile-t">Pink Floral</div></div></div><div class="dtile"><img src="IMG-20260305-WA0010.jpg" alt="905" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">905</div><div class="dtile-t">Aqua Sequin</div></div></div><div class="dtile"><img src="IMG-20260305-WA0000.jpg" alt="732" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">732</div><div class="dtile-t">Big Pana Seq.</div></div></div><div class="dtile"><img src="IMG-20260305-WA0015.jpg" alt="962" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">962</div><div class="dtile-t">Teal Dot Net</div></div></div><div class="dtile"><img src="IMG-20260305-WA0012.jpg" alt="886" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">886</div><div class="dtile-t">Silver Leaf</div></div></div><div class="dtile"><img src="IMG-20260305-WA0017.jpg" alt="906" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">906</div><div class="dtile-t">Rose Scatter</div></div></div><div class="dtile"><img src="IMG-20260305-WA0028.jpg" alt="8656" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">8656</div><div class="dtile-t">White Petal</div></div></div><div class="dtile"><img src="IMG-20260305-WA0036.jpg" alt="800" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">800</div><div class="dtile-t">Botanical Net</div></div></div><div class="dtile"><img src="IMG-20260305-WA0025.jpg" alt="8537" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">8537</div><div class="dtile-t">Geometric Lace</div></div></div><div class="dtile"><img src="IMG-20260123-WA0001.jpg" alt="737" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">737</div><div class="dtile-t">Cascade Net</div></div></div><div class="dtile"><img src="IMG-20260305-WA0016.jpg" alt="RF-782" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">RF-782</div><div class="dtile-t">Red Floral Dup</div></div></div><div class="dtile"><img src="IMG-20260305-WA0021.jpg" alt="640" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">640</div><div class="dtile-t">Diamond Star</div></div></div><div class="dtile"><img src="IMG-20260305-WA0033.jpg" alt="770" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">770</div><div class="dtile-t">Crystal Bloom</div></div></div><div class="dtile"><img src="IMG-20260305-WA0040.jpg" alt="NET-01" onerror="this.style.background='#F5E6C8'"><div class="dtile-ov"><div class="dtile-n">NET-01</div><div class="dtile-t">Sheer Net</div></div></div></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="con-sec" id="contact">
+  <p class="sec-tag">Get In Touch</p>
+  <h2 class="sec-title" style="margin-top:10px;">
+    <span>Partner With</span><br>
+    <em>Reenam Fabrics</em>
+  </h2>
+  <p class="con-desc">Wholesale enquiries, custom orders, and export partnerships welcome. Trusted by buyers across 30+ countries.</p>
+  <div class="con-btns">
+    <a href="mailto:info@reenam.co.in" class="btn-g">Send Enquiry</a>
+    <a href="https://wa.me/919825134478" class="btn-o" style="border-color:rgba(201,169,110,.5);color:var(--gold-mid);">WhatsApp Us</a>
+  </div>
+  <div class="con-info">
+    <div><div class="ci-lbl">Location</div><div class="ci-val">Surat, Gujarat, India</div></div>
+    <div><div class="ci-lbl">Email</div><div class="ci-val">info@reenam.co.in</div></div>
+    <div><div class="ci-lbl">WhatsApp</div><div class="ci-val">+91 98251 34478</div></div>
+    <div><div class="ci-lbl">Phone</div><div class="ci-val">+91 98251 34478</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-brand">Reenam Fabrics</div>
+        <p class="ft-about">Premium manufacturer and exporter of embroidered net fabrics, lace, and sequin work. Surat, Gujarat — India's textile capital.</p>
+      </div>
+      <div>
+        <p class="ft-col-t">Navigate</p>
+        <ul class="ft-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#catalog">Catalog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-t">Contact</p>
+        <ul class="ft-links">
+          <li><a href="#">Surat, Gujarat, India</a></li>
+          <li><a href="#">info@reenam.co.in</a></li>
+          <li><a href="#">+91 98251 34478</a></li>
+          <li><a href="#">WhatsApp Catalogue</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span class="ft-copy">© 2026 Reenam Fabrics Private Limited. All rights reserved.</span>
+      <span class="ft-copy">Made with pride in Surat, India</span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script>function openDrawer(){document.getElementById('mobDrawer').classList.add('open');document.getElementById('hbg').classList.add('open');}function closeDrawer(){document.getElementById('mobDrawer').classList.remove('open');document.getElementById('hbg').classList.remove('open');}(function(){var c=document.getElementById('heroCanvas');if(!c)return;var ctx=c.getContext('2d');function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight;}rs();window.addEventListener('resize',rs);var t=0;(function a(){t+=.007;ctx.clearRect(0,0,c.width,c.height);ctx.strokeStyle='rgba(184,134,11,.35)';ctx.lineWidth=.5;var sp=48;for(var x=0;x<=c.width+sp;x+=sp){for(var y=0;y<=c.height+sp;y+=sp){var wx=x+Math.sin(t+y*.05)*8,wy=y+Math.cos(t+x*.05)*8;ctx.beginPath();ctx.arc(wx,wy,1.2,0,Math.PI*2);ctx.fillStyle='rgba(184,134,11,.18)';ctx.fill();if(x>0){var px=x-sp+Math.sin(t+y*.05)*8,py=y+Math.cos(t+(x-sp)*.05)*8;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(wx,wy);ctx.stroke();}if(y>0){var px2=x+Math.sin(t+(y-sp)*.05)*8,py2=y-sp+Math.cos(t+x*.05)*8;ctx.beginPath();ctx.moveTo(px2,py2);ctx.lineTo(wx,wy);ctx.stroke();}}}requestAnimationFrame(a);})()})();var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});</script></body>
+</html>
